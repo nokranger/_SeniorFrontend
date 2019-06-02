@@ -2,44 +2,16 @@
   <div>
     <app-header></app-header>
     <div class="wrapper" style="margin-top:75px;">
-      <nav class="sidebar">
-        <ul class="list-unstyled components">
-          <li>
-            <a v-bind:href="href">&nbsp;&nbsp;
-              <img v-bind:src="imgstatus" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;&nbsp;&nbsp;สถานะของเครื่อง
-            </a>
-          </li>
-          <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">&nbsp;&nbsp;
-              <img src="../assets/img/report.png" width="40px" height="40px" align="absmiddle">&nbsp;&nbsp;&nbsp;ประวัติการใช้งาน
-            </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-              <li>
-                <a href="report_day.html">
-                  <img src="../assets/img/day.png" width="30px" height="30px" align="absmiddle">&nbsp;&nbsp;ประวัติการใช้งานรายวัน
-                </a>
-              </li>
-              <li>
-                <a href="report_month.html">
-                  <img src="../assets/img/month.png" width="30px" height="30px" align="absmiddle">&nbsp;&nbsp;ประวัติการใช้งานรายเดือน
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="control.html">
-              &nbsp;
-              <img src="../assets/img/control.png" width="50px" height="50px" align="absmiddle">&nbsp; ควบคุมเครื่อง
-            </a>
-          </li>
-          <li>
-            <a href="index.html">
-              &nbsp;
-              <img src="../assets/img/logout.png" width="52px" height="52px" align="absmiddle">&nbsp;&nbsp;ออกจากระบบ
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <div>
+          <b-row>
+            <b-col cols="4"></b-col>
+          <b-nav vertical class="w-100" style="margin-left:10px;">
+            <b-nav-item >สถานะของเครื่อง</b-nav-item>
+            <b-nav-item>ประวัติการใช้งาน</b-nav-item>
+            <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+          </b-nav>
+          </b-row>
+        </div>
       <div id="content">
         <section class="details-card">
           <div class="container">

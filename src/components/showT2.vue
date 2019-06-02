@@ -46,20 +46,20 @@
             <div class="row offset-md-1" style="margin-bottom:20px; ">
                 <img v-bind:src="imgmeterS" alt="">
                 วันที่ : 25/04/2562 <br>
-
-เวลา : 21:01<br>
-
-ค่าความถ่วงจำเพาะ : 0.198<br>
-
-อุณหภูมิ : 33 องศาเซลเซียส<br>
-
-ชนิดของสารเคมี : สาร A
-<button><router-link to="/">หน้าหลัก</router-link></button>
-<button>อ่านค่า</button>
-<button>เริ่มทำงาน</button>
+                เวลา : 21:01<br>
+                ค่าความถ่วงจำเพาะ : 0.198<br>
+                อุณหภูมิ : 33 องศาเซลเซียส<br>
+                ชนิดของสารเคมี : สาร A<br>
             </div>
           </div>
-
+          <button><router-link to="/">หน้าหลัก</router-link></button>
+          <button>อ่านค่า</button>
+          <button>เริ่มทำงาน</button>
+          <GChart
+            type="LineChart"
+            :data="chartData"
+            :options="chartOptions"
+          />
         </section>
       </div>
     </div>
@@ -84,7 +84,28 @@ export default {
       imgreport: 'https://i.imgur.com/ac0C6cs.png',
       imgcontrol: 'https://i.imgur.com/dRfcpfu.png',
       imgmeter: 'https://i.imgur.com/5e56zMj.png',
-      imgmeterS: 'https://i.imgur.com/z7mzzE9.png'
+      imgmeterS: 'https://i.imgur.com/z7mzzE9.png',
+      chartData: [
+        ['Time', 'Tank 1'],
+        ['08:00', 0],
+        ['09:00', 10],
+        ['10:00', 20],
+        ['11:00', 30],
+        ['12:00', 40],
+        ['13:00', 50],
+        ['14:00', 60],
+        ['15:00', 70],
+        ['16:00', 80],
+        ['17:00', 90],
+        ['18:00', 100]
+      ],
+      chartOptions: {
+        chart: {
+          title: 'Company Performance',
+          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          pointsVisible: true
+        }
+      }
     }
   }
 }
