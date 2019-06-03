@@ -2,44 +2,25 @@
   <div>
     <app-header></app-header>
     <div class="wrapper" style="margin-top:75px;">
-      <nav class="sidebar">
-        <ul class="list-unstyled components">
-          <li>
-            <a v-bind:href="href">&nbsp;&nbsp;
-              <img v-bind:src="imgstatus" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;&nbsp;&nbsp;สถานะของเครื่อง
-            </a>
-          </li>
-          <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">&nbsp;&nbsp;
-              <img src="../assets/img/report.png" width="40px" height="40px" align="absmiddle">&nbsp;&nbsp;&nbsp;ประวัติการใช้งาน
-            </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-              <li>
-                <a href="report_day.html">
-                  <img src="../assets/img/day.png" width="30px" height="30px" align="absmiddle">&nbsp;&nbsp;ประวัติการใช้งานรายวัน
-                </a>
-              </li>
-              <li>
-                <a href="report_month.html">
-                  <img src="../assets/img/month.png" width="30px" height="30px" align="absmiddle">&nbsp;&nbsp;ประวัติการใช้งานรายเดือน
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="control.html">
-              &nbsp;
-              <img src="../assets/img/control.png" width="50px" height="50px" align="absmiddle">&nbsp; ควบคุมเครื่อง
-            </a>
-          </li>
-          <li>
-            <a href="index.html">
-              &nbsp;
-              <img src="../assets/img/logout.png" width="52px" height="52px" align="absmiddle">&nbsp;&nbsp;ออกจากระบบ
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div>
+        <b-row>
+          <b-col cols="4"></b-col>
+            <b-nav vertical class="w-100" style="margin-left:10px;">
+              <b-nav-item ><b-link to="/">สถานะของเครื่อง</b-link></b-nav-item>
+              <b-nav-item-dropdown
+                id="my-nav-dropdown"
+                text="ประวัติการใช้งาน"
+                toggle-class="nav-link-custom"
+                right
+              >
+                <b-dropdown-item><b-link to="/usage_History_day">ประวัติการใช้งานรายวัน</b-link></b-dropdown-item>
+                <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายสัปดาห์</b-link></b-dropdown-item>
+                <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
+              </b-nav-item-dropdown>
+              <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+            </b-nav>
+        </b-row>
+      </div>
       <div id="content">
         <section class="details-card">
           <div class="container">
@@ -52,9 +33,20 @@
               ชนิดของสารเคมี : สาร A<br>
             </div>
           </div>
-          <button><router-link to="/">หน้าหลัก</router-link></button>
-          <button>อ่านค่า</button>
-          <button>เริ่มทำงาน</button>
+          <div>
+            <b-row>
+              <b-col cols="4">
+                <b-button variant="outline-primary"><router-link to="/">หน้าหลัก</router-link></b-button>
+                <b-button variant="outline-primary">เริ่มทำงาน</b-button>
+                <b-button variant="outline-primary">รายงาน</b-button>
+              </b-col>
+              <b-col cols="4">
+                <select class="form-control "  ref="select" v-model="select">
+                  <option v-for="(listDatas, index) in listData" :key="index">{{listDatas}}</option>
+                </select>
+              </b-col>
+            </b-row>
+          </div>
             <GChart
               type="LineChart"
               :data="chartData"
@@ -105,7 +97,9 @@ export default {
           subtitle: 'Sales, Expenses, and Profit: 2014-2017',
           pointsVisible: true
         }
-      }
+      },
+      select: 'Please select a chemical',
+      listData: ['Please select a chemical', 'a', 'b', 'c']
     }
   }
 }

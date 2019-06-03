@@ -2,16 +2,25 @@
   <div>
     <app-header></app-header>
     <div class="wrapper" style="margin-top:75px;">
-        <div>
-          <b-row>
-            <b-col cols="4"></b-col>
-          <b-nav vertical class="w-100" style="margin-left:10px;">
-            <b-nav-item >สถานะของเครื่อง</b-nav-item>
-            <b-nav-item>ประวัติการใช้งาน</b-nav-item>
-            <b-nav-item>ควบคุมเครื่อง</b-nav-item>
-          </b-nav>
-          </b-row>
-        </div>
+      <div>
+        <b-row>
+          <b-col cols="4"></b-col>
+            <b-nav vertical class="w-100" style="margin-left:10px;" type="dark" variant="dark">
+              <b-nav-item ><b-link to="/">สถานะของเครื่อง</b-link></b-nav-item>
+              <b-nav-item-dropdown
+                id="my-nav-dropdown"
+                text="ประวัติการใช้งาน"
+                toggle-class="nav-link-custom"
+                right
+              >
+                <b-dropdown-item><b-link to="/usage_History_day">ประวัติการใช้งานรายวัน</b-link></b-dropdown-item>
+                <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายวัน</b-link></b-dropdown-item>
+                <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
+              </b-nav-item-dropdown>
+              <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+            </b-nav>
+        </b-row>
+      </div>
       <div id="content">
         <section class="details-card">
           <div class="container">
@@ -34,7 +43,7 @@
               <b-card-text>
                 สาร A
               </b-card-text>
-              <button><router-link to="/show_T1">เครื่องที่ 1</router-link></button>
+              <b-button variant="outline-primary"><router-link to="/show_T1">เครื่องที่ 1</router-link></b-button>
               <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
             </b-card>
 
@@ -42,7 +51,7 @@
               <b-card-text>
                 สาร A
               </b-card-text>
-              <button><router-link to="/show_T2">เครื่องที่ 2</router-link></button>
+              <b-button variant="outline-primary"><router-link to="/show_T2">เครื่องที่ 2</router-link></b-button>
               <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
             </b-card>
 
@@ -50,7 +59,7 @@
               <b-card-text>
                 สาร A
               </b-card-text>
-              <button><router-link to="/show_T3">เครื่องที่ 3</router-link></button>
+              <b-button variant="outline-primary"><router-link to="/show_T3">เครื่องที่ 3</router-link></b-button>
               <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
             </b-card>
           </b-card-group>

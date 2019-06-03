@@ -8,6 +8,7 @@ import dashT1 from '../components/showT1.vue'
 import dashT2 from '../components/showT2.vue'
 import dashT3 from '../components/showT3.vue'
 import usageHD from '../components/UsageHD.vue'
+import usageHW from '../components/UsageHW.vue'
 import usageHM from '../components/UsageHM.vue'
 
 Vue.use(Router)
@@ -40,6 +41,10 @@ export default new Router({
     {
       path: '/usage_History_day',
       component: usageHD
+    },
+    {
+      path: '/usage_History_week',
+      component: usageHW
     },
     {
       path: '/usage_History_month',
