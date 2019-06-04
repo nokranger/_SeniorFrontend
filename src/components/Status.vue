@@ -14,7 +14,7 @@
                 right
               >
                 <b-dropdown-item><b-link to="/usage_History_day">ประวัติการใช้งานรายวัน</b-link></b-dropdown-item>
-                <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายวัน</b-link></b-dropdown-item>
+                <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายสัปดาห์</b-link></b-dropdown-item>
                 <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
               </b-nav-item-dropdown>
               <b-nav-item>ควบคุมเครื่อง</b-nav-item>

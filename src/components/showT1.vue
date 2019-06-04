@@ -31,13 +31,21 @@
               ค่าความถ่วงจำเพาะ : 0.198<br>
               อุณหภูมิ : 33 องศาเซลเซียส<br>
               ชนิดของสารเคมี : สาร A<br>
+              <div v-for="(post, index) in posts" :key="index">
+                <p>Date : {{post.date}}</p>
+                <p>SG : {{post.specific_gravity}}</p>
+                <p>RC : {{post.residual_chemicals}}</p>
+                <p>Temp : {{post.temp}}</p>
+                <p>TC : {{post.type_chemical}}</p>
+                <!-- <p>{{post.tankNo}}</p> -->
+              </div>
             </div>
           </div>
           <div>
             <b-row>
               <b-col cols="4">
                 <b-button variant="outline-primary"><router-link to="/">หน้าหลัก</router-link></b-button>
-                <b-button variant="outline-primary">เริ่มทำงาน</b-button>
+                <b-button variant="outline-primary" v-on:click="postAPI()">เริ่มทำงาน</b-button>
                 <b-button variant="outline-primary">รายงาน</b-button>
               </b-col>
               <b-col cols="4">
@@ -62,6 +70,7 @@
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -70,6 +79,8 @@ export default {
   },
   data () {
     return {
+      error: [],
+      posts: [],
       title: 'Login',
       href: '#',
       imgstatus: 'https://i.imgur.com/JIFQF9n.png',
@@ -99,8 +110,35 @@ export default {
         }
       },
       select: 'Please select a chemical',
-      listData: ['Please select a chemical', 'a', 'b', 'c']
+      listData: ['Please select a chemical', 'a', 'b', 'c'],
+      postAPI () {
+        axios.post('http://localhost:8081/start/post-start', {
+
+        }).then(response => {}).catch(e => {
+          this.error.push(e)
+        })
+      }
     }
+  },
+  methods: {
+  },
+  beforeCreate () {
+  },
+  created () {
+    axios.get('http://localhost:8081/chemicaltank/get-all-chemical')
+      .then(response => {
+        this.posts = response.data
+      }).catch(e => {
+        this.error.push(e)
+      })
+  },
+  beforeMount () {
+  },
+  mounted () {
+  },
+  beforeUpdate () {
+  },
+  updated () {
   }
 }
 </script>
