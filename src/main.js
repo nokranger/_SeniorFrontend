@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueGoogleCharts from 'vue-google-charts'
+import VueApexCharts from 'vue-apexcharts'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -12,6 +13,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueGoogleCharts)
+Vue.use(require('vue-moment'))
+Vue.component('apexchart', VueApexCharts)
 
 /* eslint-disable no-new */
 new Vue({

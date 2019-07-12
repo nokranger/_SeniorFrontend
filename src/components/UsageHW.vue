@@ -17,7 +17,7 @@
                 <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายสัปดาห์</b-link></b-dropdown-item>
                 <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
               </b-nav-item-dropdown>
-              <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+              <!-- <b-nav-item>ควบคุมเครื่อง</b-nav-item> -->
             </b-nav>
         </b-row>
       </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
   </div>
 </template>
 
@@ -58,10 +58,9 @@ export default {
       imgcontrol: 'https://i.imgur.com/dRfcpfu.png',
       imgmeter: 'https://i.imgur.com/z7mzzE9.png',
       items: [
-        { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-        { age: 38, first_name: 'Jami', last_name: 'Carney' }],
+        { เครื่องที่: 1, เวลาเริ่มต้น: '08:00', ชนิดของสารเคมี: 'Ba', ปริมาณสารที่ใช้ไป: '0.25%' },
+        { เครื่องที่: 2, เวลาเริ่มต้น: '08:00', ชนิดของสารเคมี: 'Bb', ปริมาณสารที่ใช้ไป: '0.35%' },
+        { เครื่องที่: 3, เวลาเริ่มต้น: '08:00', ชนิดของสารเคมี: 'Bc', ปริมาณสารที่ใช้ไป: '0.45%' }],
       chartData: [
         ['Time', 'Tank 1', 'Tank 2', 'Tank 3'],
         ['08:00', 0, 20, 50],

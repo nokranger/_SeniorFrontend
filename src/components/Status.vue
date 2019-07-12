@@ -17,7 +17,7 @@
                 <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายสัปดาห์</b-link></b-dropdown-item>
                 <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
               </b-nav-item-dropdown>
-              <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+              <!-- <b-nav-item>ควบคุมเครื่อง</b-nav-item> -->
             </b-nav>
         </b-row>
       </div>
@@ -27,12 +27,12 @@
             <div class="row offset-md-1" style="margin-bottom:20px; ">
               <div class="col-md-6">
                 <p class="text1" align="center">
-                  <img src="../assets/img/green.png" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;เครื่องอยู่ระหว่างการใช้งาน
+                  <!-- <img src="../assets/img/green.png" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;เครื่องอยู่ระหว่างการใช้งาน -->
                 </p>
               </div>
               <div class="col-md-6">
                 <p class="text1" align="center">
-                  <img src="../assets/img/red.png" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;เครื่องไม่ได้อยู่ระหว่างการใช้งาน
+                  <!-- <img src="../assets/img/red.png" width="38px" height="38px" align="absmiddle">&nbsp;&nbsp;เครื่องไม่ได้อยู่ระหว่างการใช้งาน -->
                 </p>
               </div>
             </div>
@@ -41,39 +41,40 @@
           <b-card-group deck>
             <b-card title="เครื่องที่ 1" img-src="https://i.imgur.com/z7mzzE9.png" img-alt="Image" img-top>
               <b-card-text>
-                สาร A
+                สารล่าสุดที่ใช้ : {{posts.type_chemical}}
               </b-card-text>
               <b-button variant="outline-primary"><router-link to="/show_T1">เครื่องที่ 1</router-link></b-button>
-              <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
+              <div slot="footer"><small class="text-muted">อัพเดตล่าสุด {{ posts.date | moment("h:mm:ss") }} นาฬิกา</small></div>
             </b-card>
 
             <b-card title="เครื่องที่ 2" img-src="https://i.imgur.com/z7mzzE9.png" img-alt="Image" img-top>
               <b-card-text>
-                สาร A
+                สารล่าสุดที่ใช้ : {{posts.type_chemical}}
               </b-card-text>
               <b-button variant="outline-primary"><router-link to="/show_T2">เครื่องที่ 2</router-link></b-button>
-              <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
+              <div slot="footer"><small class="text-muted">อัพเดตล่าสุด {{ posts.date | moment("h:mm:ss") }} นาฬิกา</small></div>
             </b-card>
 
             <b-card title="เครื่องที่ 3" img-src="https://i.imgur.com/z7mzzE9.png" img-alt="Image" img-top>
               <b-card-text>
-                สาร A
+                สารล่าสุดที่ใช้ : {{posts.type_chemical}}
               </b-card-text>
               <b-button variant="outline-primary"><router-link to="/show_T3">เครื่องที่ 3</router-link></b-button>
-              <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
+              <div slot="footer"><small class="text-muted">อัพเดตล่าสุด {{ posts.date | moment("h:mm:ss") }} นาฬิกา</small></div>
             </b-card>
           </b-card-group>
         </div>
         </section>
       </div>
     </div>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
   </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -82,6 +83,8 @@ export default {
   },
   data () {
     return {
+      error: [],
+      posts: [],
       title: 'Login',
       href: '#',
       imgstatus: 'https://i.imgur.com/JIFQF9n.png',
@@ -89,6 +92,15 @@ export default {
       imgcontrol: 'https://i.imgur.com/dRfcpfu.png',
       imgmeter: 'https://i.imgur.com/z7mzzE9.png'
     }
+  },
+  created () {
+    axios.get('http://localhost:8081/chemicaltank/get-last-chemicaltank')
+      .then(response => {
+        this.posts = response.data
+        console.log(this.posts.date)
+      }).catch(e => {
+        this.error.push(e)
+      })
   }
 }
 </script>

@@ -17,7 +17,7 @@
                 <b-dropdown-item><b-link to="/usage_History_week">ประวัติการใช้งานรายสัปดาห์</b-link></b-dropdown-item>
                 <b-dropdown-item><b-link to="/usage_History_month">ประวัติการใช้งานรายเดือน</b-link></b-dropdown-item>
               </b-nav-item-dropdown>
-              <b-nav-item>ควบคุมเครื่อง</b-nav-item>
+              <!-- <b-nav-item>ควบคุมเครื่อง</b-nav-item> -->
             </b-nav>
         </b-row>
       </div>
@@ -26,19 +26,21 @@
           <div class="container">
             <div class="row offset-md-1" style="margin-bottom:20px; ">
                 <img v-bind:src="imgmeterS" alt="">
-              วันที่ : 25/04/2562 <br>
-              เวลา : 21:01<br>
-              ค่าความถ่วงจำเพาะ : 0.198<br>
-              อุณหภูมิ : 33 องศาเซลเซียส<br>
-              ชนิดของสารเคมี : สาร A<br>
-              <div v-for="(post, index) in posts" :key="index">
+                  เครื่องที่ : {{tankNum}} <br>
+                  วันที่ : {{ posts.date | moment("ddd, MMMM Do YYYY") }}<br>
+                  เวลา : {{ posts.date | moment("h:mm:ss") }} นาฬิกา<br>
+                  ระยะที่วัดได้ : {{posts.specific_gravity / 10}} ซม.<br>
+                  ค่าความถ่วงจำเพาะ : {{(((posts.specific_gravity / 10) * y) + c)}}<br>
+                  <!-- อุณหภูมิ : {{posts.temp}} องศาเซลเซียส<br> -->
+                  ชนิดของสารเคมี : สาร {{posts.type_chemical}}<br>
+                  <!-- <p>{{posts.date}}</p> -->
+              <!-- <div v-for="(post, index) in posts" :key="index">
                 <p>Date : {{post.date}}</p>
                 <p>SG : {{post.specific_gravity}}</p>
                 <p>RC : {{post.residual_chemicals}}</p>
                 <p>Temp : {{post.temp}}</p>
                 <p>TC : {{post.type_chemical}}</p>
-                <!-- <p>{{post.tankNo}}</p> -->
-              </div>
+              </div> -->
             </div>
           </div>
           <div>
@@ -46,11 +48,12 @@
               <b-col cols="4">
                 <b-button variant="outline-primary"><router-link to="/">หน้าหลัก</router-link></b-button>
                 <b-button variant="outline-primary" v-on:click="postAPI()">เริ่มทำงาน</b-button>
-                <b-button variant="outline-primary">รายงาน</b-button>
+                <b-button variant="outline-primary" v-on:click="createPDF()">รายงาน</b-button>
               </b-col>
               <b-col cols="4">
-                <select class="form-control "  ref="select" v-model="select">
-                  <option v-for="(listDatas, index) in listData" :key="index">{{listDatas}}</option>
+                <select class="form-control "  ref="select" v-model="postData.typeChem">
+                    <option disabled value="">Please select a chemical</option>
+                    <option v-for="(listDatas, index) in listData" :key="index">{{ listDatas }}</option>
                 </select>
               </b-col>
             </b-row>
@@ -63,7 +66,7 @@
         </section>
       </div>
     </div>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
   </div>
 </template>
 
@@ -71,6 +74,7 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import axios from 'axios'
+import Jspdf from 'jspdf'
 
 export default {
   components: {
@@ -81,6 +85,14 @@ export default {
     return {
       error: [],
       posts: [],
+      y: -0.2068,
+      c: 5.4605,
+      tankNum: 'AD1',
+      postData: {
+        tankNo: 'AD1',
+        typeChem: ''
+      },
+      aa: 2,
       title: 'Login',
       href: '#',
       imgstatus: 'https://i.imgur.com/JIFQF9n.png',
@@ -109,25 +121,33 @@ export default {
           pointsVisible: true
         }
       },
-      select: 'Please select a chemical',
-      listData: ['Please select a chemical', 'a', 'b', 'c'],
+      listData: ['Ba', 'Bb', 'Bc', 'Bd', 'Be', 'Bf', 'Bg'],
       postAPI () {
-        axios.post('http://localhost:8081/start/post-start', {
-
-        }).then(response => {}).catch(e => {
-          this.error.push(e)
-        })
+        axios.post('http://localhost:8081/start/post-start', this.postData)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(e => {
+            this.error.push(e)
+          })
       }
     }
   },
   methods: {
+    createPDF () {
+      let pdfName = 'AD1Report'
+      var doc = new Jspdf()
+      doc.text('Hello World', 10, 10)
+      doc.save(pdfName + '.pdf')
+    }
   },
   beforeCreate () {
   },
   created () {
-    axios.get('http://localhost:8081/chemicaltank/get-all-chemical')
+    axios.get('http://localhost:8081/chemicaltank/get-last-chemicaltank')
       .then(response => {
         this.posts = response.data
+        console.log(this.posts.date)
       }).catch(e => {
         this.error.push(e)
       })

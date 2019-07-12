@@ -10,6 +10,7 @@ import dashT3 from '../components/showT3.vue'
 import usageHD from '../components/UsageHD.vue'
 import usageHW from '../components/UsageHW.vue'
 import usageHM from '../components/UsageHM.vue'
+import test from '../components/test.vue'
 
 Vue.use(Router)
 
@@ -49,7 +50,10 @@ export default new Router({
     {
       path: '/usage_History_month',
       component: usageHM
+    },
+    {
+      path: '/test',
+      component: test
     }
-
   ]
 })
